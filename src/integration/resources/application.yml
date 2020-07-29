@@ -1,0 +1,30 @@
+info:
+  app:
+    name: Fuel Log
+    description: Fuel Log Application
+
+# Actuator Endpoints Settings
+management:
+  endpoints:
+    web:
+      exposure:
+        include: "*"
+  endpoint:
+    health:
+      show-details: ALWAYS
+server:
+  port: 8090
+  http2: # Enable HTTP/2 support
+    enabled: true
+  compression: # Server compression
+    enabled: true
+    min-response-size: 2048
+    mime-types: application/json
+
+# Data Source
+spring:
+  data:
+    mongodb:
+      database: fuellogdb
+      host: localhost
+      port: 27017

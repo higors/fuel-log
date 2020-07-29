@@ -9,11 +9,11 @@ import java.time.Instant
 import static com.fuellog.entities.Trip.Fields.*
 
 class TripTemplates implements TemplateLoader {
-    public static String CAR_MODE_320_DISTANCE_100_LITERS_15 = "Car model 320i distance 100 liters 15"
+    public static String CAR_MODEL_320_DISTANCE_100_LITERS_15 = "Car model 320i distance 100 liters 15"
 
     @Override
     void load() {
-        Fixture.of(Trip.class).addTemplate(CAR_MODE_320_DISTANCE_100_LITERS_15, new Rule() {
+        Fixture.of(Trip.class).addTemplate(CAR_MODEL_320_DISTANCE_100_LITERS_15, new Rule() {
             {
                 add(carModel, "320i")
                 add(distance, BigDecimal.valueOf(100))

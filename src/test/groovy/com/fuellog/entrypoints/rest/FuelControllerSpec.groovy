@@ -59,14 +59,14 @@ class FuelControllerSpec extends Specification {
                 .andReturn()
 
         then: "get last trip must be called once and returns"
-        1 * getLastTrip.execute() >> fixture(Trip, TripTemplates.CAR_MODE_320_DISTANCE_100_LITERS_15)
+        1 * getLastTrip.execute() >> fixture(Trip, TripTemplates.CAR_MODEL_320_DISTANCE_100_LITERS_15)
 
         and: "response status must be OK"
         result.response.status == HttpStatus.OK.value()
 
         and: "response body must be correctly"
         Trip resultBody = objectMapper.readValue(result.getResponse().getContentAsString(), Trip.class)
-        resultBody == fixture(Trip, TripTemplates.CAR_MODE_320_DISTANCE_100_LITERS_15)
+        resultBody == fixture(Trip, TripTemplates.CAR_MODEL_320_DISTANCE_100_LITERS_15)
     }
 
     def <T> T fixture(Class<T> clazz, String fixture) {

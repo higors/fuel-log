@@ -10,6 +10,7 @@ import org.springframework.data.mongodb.core.MongoTemplate;
 import javax.annotation.PostConstruct;
 import java.math.BigDecimal;
 import java.time.Instant;
+import java.util.UUID;
 
 
 @Slf4j
@@ -51,6 +52,7 @@ public class SetUpTestUser {
                             final BigDecimal valuePerLiter,
                             final Instant createdOn) {
         return Trip.builder()
+            .id(UUID.randomUUID().toString())
             .carModel(model)
             .distance(distance)
             .liters(liters)
@@ -61,6 +63,7 @@ public class SetUpTestUser {
 
     private Car createCar(final String brand, final String model, final BigDecimal efficiency) {
         return Car.builder()
+            .id(UUID.randomUUID().toString())
             .brand(brand)
             .model(model)
             .efficiency(efficiency)
