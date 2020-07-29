@@ -1,0 +1,68 @@
+plugins {
+    id 'org.springframework.boot' version '2.3.1.RELEASE'
+    id 'io.spring.dependency-management' version '1.0.9.RELEASE'
+    id 'java'
+    id 'groovy'
+}
+
+group = 'com.fuel-log'
+version = '0.0.1-SNAPSHOT'
+sourceCompatibility = '1.8'
+
+configurations {
+    compileOnly {
+        extendsFrom annotationProcessor
+    }
+    integrationCompile.extendsFrom testImplementation
+}
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    implementation 'org.springframework.boot:spring-boot-starter-web',
+            'org.springframework.boot:spring-boot-starter-groovy-templates',
+            'org.springframework.boot:spring-boot-starter-data-mongodb'
+
+    compileOnly 'org.projectlombok:lombok:1.18.12'
+
+    annotationProcessor 'org.projectlombok:lombok:1.18.12'
+
+    testImplementation 'org.springframework.boot:spring-boot-starter-test',
+            'br.com.six2six:fixture-factory:3.1.0',
+            'org.spockframework:spock-core:1.2-groovy-2.4',
+            'org.spockframework:spock-spring:1.2-groovy-2.4'
+
+    testCompile 'com.athaydes:spock-reports:1.6.1', { transitive = false }
+
+    testCompileOnly 'org.projectlombok:lombok:1.18.12'
+    testAnnotationProcessor 'org.projectlombok:lombok:1.18.12'
+}
+
+test {
+    afterTest { desc, result ->
+        logger.quiet "[${desc.className.tokenize('.').last()}]: [${desc.name}] : ${result.resultType}"
+    }
+    outputs.dir "build/reports/spock/unit"
+    systemProperty "com.athaydes.spockframework.report.outputDir", "${buildDir}/spock-reports/unit"
+}
+
+sourceSets {
+    integration {
+        groovy {
+            compileClasspath += main.output
+            runtimeClasspath += main.output
+            srcDirs = ['src/integration/groovy']
+        }
+        resources.srcDir file('src/integration/resources')
+    }
+}
+
+tasks.create('integrationTest', Test) {
+    dependsOn 'compileIntegrationGroovy'
+    group = 'Verification'
+    description = 'Runs the integration tests'
+    testClassesDirs = sourceSets.integration.output.classesDirs
+    classpath = sourceSets.integration.runtimeClasspath
+    systemProperty "com.athaydes.spockframework.report.outputDir", "${buildDir}/spock-reports/integration"
+}

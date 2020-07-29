@@ -1,0 +1,37 @@
+.gradle
+/build/
+/target
+out
+log/
+logs/
+!gradle/wrapper/gradle-wrapper.jar
+
+### STS ###
+.apt_generated
+.classpath
+.factorypath
+.project
+.settings
+.springBeans
+
+### IntelliJ IDEA ###
+.idea/*
+!.idea/saveactions_settings.xml
+*.iws
+*.iml
+*.ipr
+
+### NetBeans ###
+nbproject/private/
+build/
+nbbuild/
+dist/
+nbdist/
+.nb-gradle/
+
+### Log Files ###
+.log
+LOG_FILE_IS_UNDEFINED*
+
+### Docker Images ###
+**/docker/**/.cache
