@@ -4,6 +4,8 @@ import br.com.six2six.fixturefactory.Fixture
 import br.com.six2six.fixturefactory.Rule
 import br.com.six2six.fixturefactory.loader.TemplateLoader
 
+import java.time.Instant
+
 import static com.fuellog.entities.Trip.Fields.*
 
 class TripTemplates implements TemplateLoader {
@@ -13,14 +15,12 @@ class TripTemplates implements TemplateLoader {
     void load() {
         Fixture.of(Trip.class).addTemplate(CAR_MODEL_320_DISTANCE_100_LITERS_10, new Rule() {
             {
-                add(id, "")
-                add(carModel, "")
-                add(distance, "")
-                add(liters, "")
-                add(valuePerLiter, "")
-                add(createdOn, "")
+                add(carModel, "320i")
+                add(distance, BigDecimal.valueOf(100))
+                add(liters, BigDecimal.valueOf(10))
+                add(valuePerLiter, BigDecimal.valueOf(5.85))
+                add(createdOn, Instant.parse("2020-01-01T10:35:00Z"))
             }
-
         })
     }
 }
