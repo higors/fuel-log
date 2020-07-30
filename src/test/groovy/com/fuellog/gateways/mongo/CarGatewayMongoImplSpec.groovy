@@ -21,7 +21,7 @@ class CarGatewayMongoImplSpec extends Specification {
         given: "a valid car model"
         String carModel = "car model"
         when: "the method is called"
-        BigDecimal result = carGatewayMongoImpl.getEfficiencyByCarModel(carModel);
+        BigDecimal result = carGatewayMongoImpl.getAverageEfficiencyByCarModel(carModel);
 
         then: "car repository must be called with correctly values and returns"
         1 * carRepository.getCarByModel(carModel) >> {

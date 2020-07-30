@@ -25,7 +25,7 @@ class ProcessTripSpec extends Specification {
         def result = processTrip.execute(trip)
 
         then: "car gateway must be called once with correctly values and returns"
-        1 * carGateway.getEfficiencyByCarModel(_ as String) >> {
+        1 * carGateway.getAverageEfficiencyByCarModel(_ as String) >> {
             String cardModelArg ->
                 assert cardModelArg == "320i"
                 return avarageefficiencyPerLiter
@@ -36,9 +36,9 @@ class ProcessTripSpec extends Specification {
 
         where:
         scenario                       | tripTemplate                                       | avarageefficiencyPerLiter | expectedMessage
-        "good with higher efficiency"  | TripTemplates.CAR_MODEL_320_DISTANCE_100_LITERS_10 | BigDecimal.valueOf(8)     | "Parabéns você é um amigo do meio ambiente"
-        "good with exactly efficiency" | TripTemplates.CAR_MODEL_320_DISTANCE_100_LITERS_10 | BigDecimal.valueOf(10)    | "Parabéns você é um amigo do meio ambiente"
-        "bad"                          | TripTemplates.CAR_MODEL_320_DISTANCE_100_LITERS_10 | BigDecimal.valueOf(11)    | "Que pena o seu consumo foi horrível, ande mais de vagar da próxima vez"
+        "good with higher efficiency"  | TripTemplates.CAR_MODEL_320_DISTANCE_100_LITERS_10 | BigDecimal.valueOf(8)     | "Parabï¿½ns vocï¿½ ï¿½ um amigo do meio ambiente"
+        "good with exactly efficiency" | TripTemplates.CAR_MODEL_320_DISTANCE_100_LITERS_10 | BigDecimal.valueOf(10)    | "Parabï¿½ns vocï¿½ ï¿½ um amigo do meio ambiente"
+        "bad"                          | TripTemplates.CAR_MODEL_320_DISTANCE_100_LITERS_10 | BigDecimal.valueOf(11)    | "Que pena o seu consumo foi horrï¿½vel, ande mais de vagar da prï¿½xima vez"
     }
 
     def <T> T fixture(Class<T> clazz, String fixture) {
