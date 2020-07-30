@@ -12,7 +12,7 @@ import org.springframework.stereotype.Repository;
 public class CarRepository {
     private final MongoOperations mongoOperations;
 
-    public Car getEfficiencyByCarModel(final String model) {
+    public Car getCarByModel(final String model) {
         final Query query = new Query();
         query.addCriteria(Criteria.where("model").is(model));
         return mongoOperations.findOne(query, Car.class);

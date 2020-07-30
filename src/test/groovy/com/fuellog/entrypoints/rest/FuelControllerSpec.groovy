@@ -53,20 +53,20 @@ class FuelControllerSpec extends Specification {
     }
 
     def "Get last trip successfully"() {
-        when: "request to the endpoint"
+        when: "the api is requested"
         MvcResult result = mvc.perform(MockMvcRequestBuilders.get("/v1/trips/last-trip")
                 .contentType(MediaType.APPLICATION_JSON))
                 .andReturn()
 
         then: "get last trip must be called once and returns"
-        1 * getLastTrip.execute() >> fixture(Trip, TripTemplates.CAR_MODEL_320_DISTANCE_100_LITERS_15)
+        1 * getLastTrip.execute() >> fixture(Trip, TripTemplates.CAR_MODEL_320_DISTANCE_100_LITERS_10)
 
         and: "response status must be OK"
         result.response.status == HttpStatus.OK.value()
 
         and: "response body must be correctly"
         Trip resultBody = objectMapper.readValue(result.getResponse().getContentAsString(), Trip.class)
-        resultBody == fixture(Trip, TripTemplates.CAR_MODEL_320_DISTANCE_100_LITERS_15)
+        resultBody == fixture(Trip, TripTemplates.CAR_MODEL_320_DISTANCE_100_LITERS_10)
     }
 
     def <T> T fixture(Class<T> clazz, String fixture) {
