@@ -20,8 +20,8 @@ public class ProcessTrip {
         final BigDecimal distance = trip.getDistance();
         final BigDecimal kmPerLiter = distance.divide(trip.getLiters(), RoundingMode.HALF_EVEN);
 
-        final BigDecimal efficiencyByCarModel = carGateway.getEfficiencyByCarModel(carModel);
-        if (kmPerLiter.compareTo(efficiencyByCarModel) >= 0) {
+        final BigDecimal averageEfficiencyByCarModel = carGateway.getAverageEfficiencyByCarModel(carModel);
+        if (kmPerLiter.compareTo(averageEfficiencyByCarModel) >= 0) {
             return GOOD_MESSAGE;
         } else {
             return BAD_MESSAGE;
