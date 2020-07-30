@@ -14,6 +14,7 @@ configurations {
         extendsFrom annotationProcessor
     }
     integrationCompile.extendsFrom testImplementation
+    componentCompile.extendsFrom testImplementation
 }
 repositories {
     mavenCentral()
@@ -56,6 +57,14 @@ sourceSets {
         }
         resources.srcDir file('src/integration/resources')
     }
+    component {
+        groovy {
+            compileClasspath += main.output
+            runtimeClasspath += main.output
+            srcDirs = ['src/component/groovy']
+        }
+        resources.srcDir file('src/component/resources')
+    }
 }
 
 tasks.create('integrationTest', Test) {
@@ -65,4 +74,12 @@ tasks.create('integrationTest', Test) {
     testClassesDirs = sourceSets.integration.output.classesDirs
     classpath = sourceSets.integration.runtimeClasspath
     systemProperty "com.athaydes.spockframework.report.outputDir", "${buildDir}/spock-reports/integration"
+}
+tasks.create('componentTest', Test) {
+    dependsOn 'compileComponentGroovy'
+    group = 'Verification'
+    description = 'Runs the component tests'
+    testClassesDirs = sourceSets.component.output.classesDirs
+    classpath = sourceSets.component.runtimeClasspath
+    systemProperty "com.athaydes.spockframework.report.outputDir", "${buildDir}/spock-reports/component"
 }
