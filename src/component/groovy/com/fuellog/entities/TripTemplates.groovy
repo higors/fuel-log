@@ -3,7 +3,6 @@ package com.fuellog.entities
 import br.com.six2six.fixturefactory.Fixture
 import br.com.six2six.fixturefactory.Rule
 import br.com.six2six.fixturefactory.loader.TemplateLoader
-import com.fuellog.entities.Trip
 
 import java.time.Instant
 

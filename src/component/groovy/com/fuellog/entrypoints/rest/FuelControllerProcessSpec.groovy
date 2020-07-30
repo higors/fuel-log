@@ -72,7 +72,7 @@ class FuelControllerProcessSpec extends Specification {
                 .andReturn()
 
         then: "is got the correct car in database"
-        repositoryCalls * carRepository.getEfficiencyByCarModel(_ as String) >> { String carModel ->
+        repositoryCalls * carRepository.getCarByModel(_ as String) >> { String carModel ->
             assert carModel == trip.carModel
             return car
         }
@@ -84,7 +84,7 @@ class FuelControllerProcessSpec extends Specification {
         where:
         scenario    | repositoryCalls | car       | status        | response
         "good trip" | 1               | getCar(1) | HttpStatus.OK | "Parabens voce e um amigo do meio ambiente"
-        "bad trip"  | 1               | getCar(8) | HttpStatus.OK | "Que pena o seu consumo foi horrivel, ande mais de vagar da proxima vez"
+        "bad trip"  | 1               | getCar(8) | HttpStatus.OK | "Que pena o seu consumo foi horrivel, ande mais devagar da proxima vez"
     }
 
 
