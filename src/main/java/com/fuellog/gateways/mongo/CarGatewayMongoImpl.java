@@ -16,7 +16,7 @@ public class CarGatewayMongoImpl implements CarGateway {
 
     @Override
     public BigDecimal getEfficiencyByCarModel(final String carModel) {
-        final Car car = carRepository.getEfficiencyByCarModel(carModel);
+        final Car car = carRepository.getCarByModel(carModel);
         return car.getEfficiency();
     }
 }
