@@ -1,5 +1,37 @@
-# Mongo
-mongo:
-  image: mongo:3.6.5
-  ports:
-    - "27017:27017"
+version: '3'
+
+services:
+  db-postgres:
+    image: postgres
+    container_name: db-postgres
+    environment:
+      POSTGRES_DB: "test-pg"
+      POSTGRES_USER: "test-pg"
+      POSTGRES_PASSWORD: "pswd_test"
+    ports:
+      - 5432:5432
+    networks:
+      - db-postgres-network
+
+  db-pgadmin:
+    image: dpage/pgadmin4
+    container_name: db-postgres-pgadmin
+    environment:
+      PGADMIN_DEFAULT_EMAIL: "admin@admin.com.br"
+      PGADMIN_DEFAULT_PASSWORD: "dbadmin123"
+    ports:
+      - 6543:80
+    depends_on:
+      - db-postgres
+    networks:
+      - db-postgres-network
+
+  mongo:
+    image: mongo:3.6.5
+    ports:
+      - 27017:27017
+    networks:
+      - db-postgres-network
+networks:
+  db-postgres-network:
+    driver: bridge

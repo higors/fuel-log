@@ -23,8 +23,24 @@ server:
 
 # Data Source
 spring:
+  jpa:
+    hibernate:
+      ddl-auto: update
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.PostgreSQL10Dialect
+
+  datasource:
+    driver: org.postgresql.postgresql
+    url: jdbc:postgresql://localhost:5432/test-pg
+    username: test-pg
+    password: pswd_test
+    initialization-mode: always
   data:
     mongodb:
       database: fuellogdb
       host: localhost
       port: 27017
+  jackson:
+    serialization:
+      FAIL_ON_EMPTY_BEANS: false

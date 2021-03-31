@@ -23,7 +23,9 @@ repositories {
 dependencies {
     implementation 'org.springframework.boot:spring-boot-starter-web',
             'org.springframework.boot:spring-boot-starter-groovy-templates',
-            'org.springframework.boot:spring-boot-starter-data-mongodb'
+            'org.springframework.boot:spring-boot-starter-data-mongodb',
+            'org.postgresql:postgresql',
+            'org.springframework.boot:spring-boot-starter-data-jpa'
 
     compileOnly 'org.projectlombok:lombok:1.18.12'
 
